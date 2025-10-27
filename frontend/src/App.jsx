@@ -17,7 +17,7 @@ export default function App() {
       setBooks(data);
     } catch (err) {
       console.error(err);
-      alert("שגיאה בשליפת ספרים");
+      alert("error loading books");
     }
   };
 
@@ -31,7 +31,7 @@ export default function App() {
       setEditing(null);
     } catch (err) {
       console.error(err);
-      alert(err?.response?.data?.message || "שגיאה ביצירת ספר");
+      alert(err?.response?.data?.message || "error creating book");
     }
   };
 
@@ -48,19 +48,19 @@ export default function App() {
       setEditing(null);
     } catch (err) {
       console.error(err);
-      alert(err?.response?.data?.message || "שגיאה בעדכון");
+      alert(err?.response?.data?.message || "error updating");
     }
   };
 
   const handleDelete = async (id) => {
-    if (!confirm("להסיר את הספר?")) return;
+    if (!confirm("remove the book")) return;
     try {
       await api.deleteBook(id);
       setBooks(prev => prev.filter(b => b.id !== id));
       if (selectedBook?.id === id) setSelectedBook(null);
     } catch (err) {
       console.error(err);
-      alert("שגיאה במחיקה");
+      alert("error deleting");
     }
   };
 
@@ -104,12 +104,12 @@ export default function App() {
 
           <div className="card" style={{marginTop:12}}>
             <form onSubmit={handleSearch} style={{display:"flex",gap:8,alignItems:"center"}}>
-              <input name="title" className="input" placeholder="חפש לפי כותרת" />
-              <input name="author" className="input" placeholder="חפש לפי מחבר" />
-              <input name="category" className="input" placeholder="חפש לפי קטגוריה" />
-              <button className="btn" type="submit">חפש</button>
+              <input name="title" className="input" placeholder="search by title" />
+              <input name="author" className="input" placeholder="search by auther" />
+              <input name="category" className="input" placeholder="seearch by category" />
+              <button className="btn" type="submit">search</button>
             </form>
-            <div style={{marginTop:8}} className="small">סינון פעיל: {Object.keys(filter).length ? JSON.stringify(filter) : "ללא"}</div>
+            <div style={{marginTop:8}} className="small">active filtering: {Object.keys(filter).length ? JSON.stringify(filter) : "without"}</div>
           </div>
 
           <div style={{marginTop:12}}>

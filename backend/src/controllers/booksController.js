@@ -1,6 +1,5 @@
 const Book = require("../models/Book");
 
-// Create book
 exports.createBook = async (req, res) => {
   try {
     const { title, author, year, category } = req.body;
@@ -16,12 +15,11 @@ exports.createBook = async (req, res) => {
   }
 };
 
-// Get all books with dynamic filtering
 exports.getBooks = async (req, res) => {
   try {
     const filter = {};
     const { author, category, title, year } = req.query;
-    if (author) filter.author = new RegExp(author, "i"); // partial case-insensitive
+    if (author) filter.author = new RegExp(author, "i");
     if (title) filter.title = new RegExp(title, "i");
     if (category) filter.category = new RegExp(category, "i");
     if (year) filter.year = Number(year);
@@ -33,7 +31,6 @@ exports.getBooks = async (req, res) => {
   }
 };
 
-// Get single book
 exports.getBookById = async (req, res) => {
   try {
     const book = await Book.findById(req.params.id);
@@ -46,11 +43,9 @@ exports.getBookById = async (req, res) => {
   }
 };
 
-// Update book
 exports.updateBook = async (req, res) => {
   try {
     const updates = req.body;
-    // Validate: do not allow empty title/author if provided
     if (updates.title === "") return res.status(400).json({ message: "title cannot be empty" });
     if (updates.author === "") return res.status(400).json({ message: "author cannot be empty" });
 
@@ -64,7 +59,6 @@ exports.updateBook = async (req, res) => {
   }
 };
 
-// Delete book
 exports.deleteBook = async (req, res) => {
   try {
     const book = await Book.findByIdAndDelete(req.params.id);

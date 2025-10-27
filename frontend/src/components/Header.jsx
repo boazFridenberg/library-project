@@ -7,11 +7,11 @@ export default function Header({ onRefresh }) {
         <div className="logo">LB</div>
         <div>
           <div className="title">Library</div>
-          <div className="small">ממשק ניהול ספרים</div>
+          <div className="small">Bookkeeping</div>
         </div>
       </div>
       <div className="controls">
-        <button className="btn secondary" onClick={onRefresh}>רענן</button>
+        <button className="btn secondary" onClick={onRefresh}>Refresh</button>
       </div>
     </div>
   );
